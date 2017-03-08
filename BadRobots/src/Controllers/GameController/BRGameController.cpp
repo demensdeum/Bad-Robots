@@ -13,7 +13,36 @@
 
 #include "BRGameController.h"
 
+#include <BadRobots/src/Const/BRConst.h>
+#include <BadRobots/src/Controllers/InGameController/BRInGameController.h>
+
+#include <FlameSteelEngineGameToolkit/IOSystems/SDL/FSEGTIOSDLSystem.h>
+#include <FlameSteelEngineGameToolkit/IOSystems/SDL/FSEGTIOSDLSystemParams.h>
+
+#include <FlameSteelEngine/FSEUtils.h>
+
+#include <memory>
+
+using namespace std;
+
 BRGameController::BRGameController() {
+
+    // States
+
+    auto inGameController = shared_ptr<BRInGameController>(new BRInGameController());
+    this->setControllerForState(inGameController, BRStateIngame);
+
+    // IO System
+
+    auto ioSystemParams = shared_ptr<FSEGTIOSDLSystemParams>(new FSEGTIOSDLSystemParams());
+    ioSystemParams->title = FSEUtils::localizedString(shared_ptr<string>(new string("Bad Robots")));
+    ioSystemParams->width = 800;
+    ioSystemParams->height = 600;
+    
+    auto ioSystem = shared_ptr<FSEGTIOSDLSystem>(new FSEGTIOSDLSystem());
+    ioSystem->initialize(ioSystemParams);
+    
+    this->ioSystem = ioSystem;
 }
 
 BRGameController::BRGameController(const BRGameController& orig) {

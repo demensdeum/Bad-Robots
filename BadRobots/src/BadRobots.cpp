@@ -22,8 +22,8 @@ int main() {
 
 	cout << "Bad Robots, bad bad robots, very bad." << endl;
 
-        BRGameController controller;
-        controller.startGame(BRStateCredits);
+        auto controller = shared_ptr<BRGameController>(new BRGameController());
+        controller->startGameFromState(BRStateIngame);
         
 	return 0;
 }

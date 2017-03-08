@@ -13,10 +13,21 @@
 
 #include "BRInGameController.h"
 
+#include <iostream>
+
+using namespace std;
+
 BRInGameController::BRInGameController() {
 }
 
-BRInGameController::BRInGameController(const BRInGameController& orig) {
+BRInGameController::BRInGameController(const BRInGameController& orig) {    
+}
+
+void BRInGameController::step() {
+    
+    renderer->blankScreen();
+    
+    renderer->render(gameData);
 }
 
 BRInGameController::~BRInGameController() {

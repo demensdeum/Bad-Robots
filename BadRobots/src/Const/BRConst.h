@@ -14,10 +14,17 @@
 #ifndef BRCONST_H
 #define BRCONST_H
 
+#include <string>
+
+using namespace std;
+
 // states
 
-static const char *BRStateCredits = "Credits Screen";
-static const char *BRStateMenu = "Menu Screen";
+enum BRState {
+    
+    BRStateIngame
+    
+};
 
 #endif /* BRCONST_H */
 

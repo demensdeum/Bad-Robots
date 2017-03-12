@@ -14,16 +14,17 @@
 #ifndef BRINGAMECONTROLLER_H
 #define BRINGAMECONTROLLER_H
 
-#include <FlameSteelEngineGameToolkit/Controllers/FSEGTController.h>
+#include <FlameSteelEngineGameToolkit/Controllers/FSEGTSceneController.h>
 
-class BRInGameController: public FSEGTController {
+class BRInGameController: public FSEGTSceneController {
 public:
     BRInGameController();
+    BRInGameController(const BRInGameController& orig);    
+    virtual ~BRInGameController();
     
     virtual void step();
+    virtual void beforeStart();
     
-    BRInGameController(const BRInGameController& orig);
-    virtual ~BRInGameController();
 private:
 
 };

@@ -18,6 +18,7 @@
 
 #include <FlameSteelEngineGameToolkit/IOSystems/SDL/FSEGTIOSDLSystem.h>
 #include <FlameSteelEngineGameToolkit/IOSystems/SDL/FSEGTIOSDLSystemParams.h>
+#include <FlameSteelEngineGameToolkit/IOSystems/SDL/ResourcesLoader/FSEGTSDLResourcesLoader.h>
 
 #include <FlameSteelEngine/FSEUtils.h>
 
@@ -27,6 +28,11 @@ using namespace std;
 
 BRGameController::BRGameController() {
 
+    // Resources Manager
+    
+    resourcesLoader = shared_ptr<FSEGTSDLResourcesLoader>(new FSEGTSDLResourcesLoader());
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathSceneImage)), resourcesManager);
+    
     // States
 
     auto inGameController = shared_ptr<BRInGameController>(new BRInGameController());
@@ -36,8 +42,8 @@ BRGameController::BRGameController() {
 
     auto ioSystemParams = shared_ptr<FSEGTIOSDLSystemParams>(new FSEGTIOSDLSystemParams());
     ioSystemParams->title = FSEUtils::localizedString(shared_ptr<string>(new string("Bad Robots")));
-    ioSystemParams->width = 800;
-    ioSystemParams->height = 600;
+    ioSystemParams->width = 720;
+    ioSystemParams->height = 405;
     
     auto ioSystem = shared_ptr<FSEGTIOSDLSystem>(new FSEGTIOSDLSystem());
     ioSystem->initialize(ioSystemParams);

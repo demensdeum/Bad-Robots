@@ -26,5 +26,13 @@ enum BRState {
     
 };
 
+// object identifiers
+
+const string BRObjectClassIdentifierRobot = "Bad Robots Object";
+
+// file paths
+
+const string BRFilePathSceneImage = "data/graphics/scene.png";
+
 #endif /* BRCONST_H */
 

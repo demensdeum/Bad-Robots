@@ -48,7 +48,7 @@ BRGameController::BRGameController() {
     auto ioSystem = shared_ptr<FSEGTIOSDLSystem>(new FSEGTIOSDLSystem());
     ioSystem->initialize(ioSystemParams);
     
-    this->ioSystem = ioSystem;
+    this->setIOSystem(ioSystem);
 }
 
 BRGameController::BRGameController(const BRGameController& orig) {

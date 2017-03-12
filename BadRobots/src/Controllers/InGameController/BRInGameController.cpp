@@ -39,6 +39,8 @@ void BRInGameController::step() {
     renderer->blankScreen();
     
     renderer->render(gameData);
+    
+    renderer->updateScreen();
 }
 
 BRInGameController::~BRInGameController() {

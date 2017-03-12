@@ -29,6 +29,7 @@ enum BRState {
 // object identifiers
 
 const string BRObjectClassIdentifierRobot = "Bad Robots Object";
+const string BRObjectClassIdentifierScene = "Bad Robots Scene Background";
 
 // file paths
 

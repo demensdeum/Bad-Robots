@@ -14,6 +14,7 @@
 #include "BRSceneFactory.h"
 #include "FlameSteelEngineGameToolkit/Data/Components/FSEGTComponentsGenerator.h"
 
+#include <iostream>
 #include <BadRobots/src/Const/BRConst.h>
 
 BRSceneFactory::BRSceneFactory() {
@@ -25,12 +26,19 @@ BRSceneFactory::BRSceneFactory(const BRSceneFactory& orig) {
 shared_ptr<FSEObject> BRSceneFactory::makeRobot() {
     
     auto robot = shared_ptr<FSEObject>(new FSEObject());
+    robot->setInstanceIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierRobot)));
     robot->setClassIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierRobot)));
     
     return robot;
 }
 
 void BRSceneFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
+    
+    if (gameData.get() == NULL) {
+        
+        cout << "BRSceneFactory: cannot makeScene - gameData is NULL" << endl;
+        exit(1);
+    }
     
     auto gameObjects = gameData->getGameObjects();
     
@@ -41,6 +49,8 @@ void BRSceneFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
     // background
     
     auto background = shared_ptr<FSEObject>(new FSEObject());
+    background->setInstanceIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierScene)));
+    background->setClassIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierScene)));
     
     auto spriteComponent = FSEGTComponentsGenerator::generateSpriteComponent(shared_ptr<string>(new string(BRFilePathSceneImage)));
     
@@ -53,8 +63,8 @@ void BRSceneFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
     positionComponent->x = 360;
     positionComponent->y = 405;
     
-    background->addComponent(spriteComponent);
     background->addComponent(positionComponent);
+    background->addComponent(spriteComponent);
     
     gameObjects->addObject(background);
 }

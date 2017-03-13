@@ -30,6 +30,8 @@ void BRInGameController::beforeStart() {
     
     BRSceneFactory::makeScene(gameData);
     
+    this->setSceneObjects(gameData->getGameObjects());
+    
 }
 
 void BRInGameController::step() {

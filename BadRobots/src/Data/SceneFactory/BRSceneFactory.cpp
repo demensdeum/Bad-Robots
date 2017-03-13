@@ -29,6 +29,27 @@ shared_ptr<FSEObject> BRSceneFactory::makeRobot() {
     robot->setInstanceIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierRobot)));
     robot->setClassIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierRobot)));
     
+    auto spriteComponent = FSEGTComponentsGenerator::generateSpriteComponent(shared_ptr<string>(new string(BRFilePathRobotImage)));
+    
+    spriteComponent->framesCount = 1;
+    spriteComponent->width = 68;
+    spriteComponent->height = 68;    
+    
+    robot->addComponent(spriteComponent);
+    
+    auto positionComponent = FSEGTComponentsGenerator::generatePositionComponent();
+    
+    positionComponent->x = 360;
+    positionComponent->y = 405;    
+    
+    robot->addComponent(positionComponent);
+    
+    auto speedComponent = FSEGTComponentsGenerator::generateSpeedComponent(1);
+    auto rotationComponent = FSEGTComponentsGenerator::generateRotationComponent(0);
+    
+    robot->addComponent(speedComponent);
+    robot->addComponent(rotationComponent);
+    
     return robot;
 }
 
@@ -67,6 +88,11 @@ void BRSceneFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
     background->addComponent(spriteComponent);
     
     gameObjects->addObject(background);
+    
+    // robots
+    
+    gameObjects->addObject(BRSceneFactory::makeRobot());
+    
 }
 
 BRSceneFactory::~BRSceneFactory() {

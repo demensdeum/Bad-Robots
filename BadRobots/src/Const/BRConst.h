@@ -34,6 +34,7 @@ const string BRObjectClassIdentifierScene = "Bad Robots Scene Background";
 // file paths
 
 const string BRFilePathSceneImage = "data/graphics/scene.png";
+const string BRFilePathRobotImage = "data/graphics/robot.png";
 
 #endif /* BRCONST_H */
 

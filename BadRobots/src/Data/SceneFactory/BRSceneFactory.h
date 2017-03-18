@@ -28,6 +28,7 @@ public:
     virtual ~BRSceneFactory();
     
     static shared_ptr<FSEObject> makeRobot();
+    static shared_ptr<FSEObject> makeCrosshair();
     
     static void makeScene(shared_ptr<FSEGTGameData> gameData);
     

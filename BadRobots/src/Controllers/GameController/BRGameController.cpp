@@ -33,6 +33,7 @@ BRGameController::BRGameController() {
     resourcesLoader = shared_ptr<FSEGTSDLResourcesLoader>(new FSEGTSDLResourcesLoader());
     resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathSceneImage)), resourcesManager);
     resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathRobotImage)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathCrosshairImage)), resourcesManager);
     
     // States
 
@@ -43,8 +44,8 @@ BRGameController::BRGameController() {
 
     auto ioSystemParams = shared_ptr<FSEGTIOSDLSystemParams>(new FSEGTIOSDLSystemParams());
     ioSystemParams->title = FSEUtils::localizedString(shared_ptr<string>(new string("Bad Robots")));
-    ioSystemParams->width = 720;
-    ioSystemParams->height = 405;
+    ioSystemParams->width = BRGameControllerScreenWidth;
+    ioSystemParams->height = BRGameControllerScreenHeight;
     
     auto ioSystem = shared_ptr<FSEGTIOSDLSystem>(new FSEGTIOSDLSystem());
     ioSystem->initialize(ioSystemParams);

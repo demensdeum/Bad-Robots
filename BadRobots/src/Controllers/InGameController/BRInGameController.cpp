@@ -19,6 +19,16 @@
 using namespace std;
 
 BRInGameController::BRInGameController() {
+    
+    robotsController = shared_ptr<BRSceneRobotsController>(new BRSceneRobotsController());
+    
+    robotsController->gameplayDifficulty = 10;
+    
+    crosshairController = shared_ptr<BRCrosshairController>(new BRCrosshairController());
+    
+    objectsPickerController = shared_ptr<BRObjectsPickerController>(new BRObjectsPickerController());
+    
+    objectsPickerController->delegate = this;
 }
 
 BRInGameController::BRInGameController(const BRInGameController& orig) {    
@@ -38,11 +48,35 @@ void BRInGameController::step() {
     
     FSEGTSceneController::step();
     
+    this->ioSystem->getInputController()->pollKey();
+    this->ioSystem->getInputController()->pollPointerPosition();
+    
+    crosshairController->step(this->ioSystem->getInputController(), gameData);
+    
+    objectsPickerController->step(this->ioSystem->getInputController(), gameData);
+    
+    robotsController->step(gameData);
+    
     renderer->blankScreen();
     
     renderer->render(gameData);
     
     renderer->updateScreen();
+    
+}
+
+void BRInGameController::objectsPickerDidPickerObject(BRObjectsPickerController *pickerController, shared_ptr<FSEObject> object) {
+    
+    cout << "BRInGameController: picked object" << endl;
+    
+    if (object->getClassIdentifier()->compare(BRObjectClassIdentifierRobot) == 0) {
+        
+        robotsController->respawnRobot(object);
+        
+        robotsController->gameplayDifficulty++;
+        
+    }
+    
 }
 
 BRInGameController::~BRInGameController() {

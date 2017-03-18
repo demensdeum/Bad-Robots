@@ -31,9 +31,11 @@ shared_ptr<FSEObject> BRSceneFactory::makeRobot() {
     
     auto spriteComponent = FSEGTComponentsGenerator::generateSpriteComponent(shared_ptr<string>(new string(BRFilePathRobotImage)));
     
-    spriteComponent->framesCount = 1;
+    spriteComponent->framesCount = 4;
     spriteComponent->width = 68;
     spriteComponent->height = 68;    
+    
+    spriteComponent->animationTickMax = 20;
     
     robot->addComponent(spriteComponent);
     
@@ -51,6 +53,29 @@ shared_ptr<FSEObject> BRSceneFactory::makeRobot() {
     robot->addComponent(rotationComponent);
     
     return robot;
+}
+
+shared_ptr<FSEObject> BRSceneFactory::makeCrosshair() {
+    
+    auto crosshair = shared_ptr<FSEObject>(new FSEObject());
+    crosshair->setInstanceIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierCrosshair)));
+    crosshair->setClassIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierCrosshair)));    
+    
+    auto spriteComponent = FSEGTComponentsGenerator::generateSpriteComponent(shared_ptr<string>(new string(BRFilePathCrosshairImage)));
+    
+    spriteComponent->width = 64;
+    spriteComponent->height = 64;    
+    
+    crosshair->addComponent(spriteComponent);
+    
+    auto positionComponent = FSEGTComponentsGenerator::generatePositionComponent();
+    
+    positionComponent->x = 64;
+    positionComponent->y = 64;
+    
+    crosshair->addComponent(positionComponent);
+    
+    return crosshair;
 }
 
 void BRSceneFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
@@ -89,10 +114,9 @@ void BRSceneFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
     
     gameObjects->addObject(background);
     
-    // robots
+    // crosshair
     
-    gameObjects->addObject(BRSceneFactory::makeRobot());
-    
+    gameObjects->addObject(BRSceneFactory::makeCrosshair());
 }
 
 BRSceneFactory::~BRSceneFactory() {

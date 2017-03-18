@@ -26,15 +26,27 @@ enum BRState {
     
 };
 
+static int BRCrosshairWidth = 64;
+static int BRCrosshairHeight = 64;
+
+static int BRGameSceneTop = 250;
+
+static int BRGameControllerScreenWidth = 720;
+static int BRGameControllerScreenHeight = 405;
+
+static int BRRobotWidth = 68;
+
 // object identifiers
 
-const string BRObjectClassIdentifierRobot = "Bad Robots Object";
+const string BRObjectClassIdentifierRobot = "Bad Robots Robot";
 const string BRObjectClassIdentifierScene = "Bad Robots Scene Background";
+const string BRObjectClassIdentifierCrosshair = "Bad Robots Crosshair";
 
 // file paths
 
 const string BRFilePathSceneImage = "data/graphics/scene.png";
 const string BRFilePathRobotImage = "data/graphics/robot.png";
+const string BRFilePathCrosshairImage = "data/graphics/crosshair.png";
 
 #endif /* BRCONST_H */
 

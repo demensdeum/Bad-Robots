@@ -39,11 +39,8 @@ shared_ptr<FSEObject> BRSceneFactory::makeRobot() {
     
     robot->addComponent(spriteComponent);
     
-    auto positionComponent = FSEGTComponentsGenerator::generatePositionComponent();
-    
-    positionComponent->x = 360;
-    positionComponent->y = 405;    
-    
+    auto positionComponent = FSEGTComponentsGenerator::generatePositionComponent(360, 405);
+        
     robot->addComponent(positionComponent);
     
     auto speedComponent = FSEGTComponentsGenerator::generateSpeedComponent(1);
@@ -104,10 +101,7 @@ void BRSceneFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
     spriteComponent->width = 720;
     spriteComponent->height = 405;
     
-    auto positionComponent = FSEGTComponentsGenerator::generatePositionComponent();
-    
-    positionComponent->x = 360;
-    positionComponent->y = 405;
+    auto positionComponent = FSEGTComponentsGenerator::generatePositionComponent(360, 405);
     
     background->addComponent(positionComponent);
     background->addComponent(spriteComponent);

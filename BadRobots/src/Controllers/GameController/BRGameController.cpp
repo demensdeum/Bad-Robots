@@ -15,6 +15,7 @@
 
 #include <BadRobots/src/Const/BRConst.h>
 #include <BadRobots/src/Controllers/InGameController/BRInGameController.h>
+#include <BadRobots/src/Controllers/CreditsController/BRCreditsController.h>
 
 #include <FlameSteelEngineGameToolkit/IOSystems/SDL/FSEGTIOSDLSystem.h>
 #include <FlameSteelEngineGameToolkit/IOSystems/SDL/FSEGTIOSDLSystemParams.h>
@@ -34,9 +35,14 @@ BRGameController::BRGameController() {
     resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathSceneImage)), resourcesManager);
     resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathRobotImage)), resourcesManager);
     resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathCrosshairImage)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathDemensdeumLogoImage)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathFlameSteelEngineLogoImage)), resourcesManager);
     
     // States
 
+    auto creditsController = shared_ptr<BRCreditsController>(new BRCreditsController());
+    this->setControllerForState(creditsController, BRStateCredits);
+    
     auto inGameController = shared_ptr<BRInGameController>(new BRInGameController());
     this->setControllerForState(inGameController, BRStateIngame);
 

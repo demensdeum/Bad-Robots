@@ -22,6 +22,7 @@ using namespace std;
 
 enum BRState {
     
+    BRStateCredits,
     BRStateIngame
     
 };
@@ -43,6 +44,9 @@ const string BRObjectClassIdentifierScene = "Bad Robots Scene Background";
 const string BRObjectClassIdentifierCrosshair = "Bad Robots Crosshair";
 
 // file paths
+
+const string BRFilePathDemensdeumLogoImage = "data/graphics/demensdeumLogo.png";
+const string BRFilePathFlameSteelEngineLogoImage = "data/graphics/flameSteelEngineLogo.png";
 
 const string BRFilePathSceneImage = "data/graphics/scene.png";
 const string BRFilePathRobotImage = "data/graphics/robot.png";

@@ -12,7 +12,7 @@
  */
 
 #include "BRSceneFactory.h"
-#include "FlameSteelEngineGameToolkit/Data/Components/FSEGTComponentsGenerator.h"
+#include "FlameSteelEngineGameToolkit/Data/Components/FSEGTFactory.h"
 
 #include <iostream>
 #include <BadRobots/src/Const/BRConst.h>
@@ -29,7 +29,7 @@ shared_ptr<FSEObject> BRSceneFactory::makeRobot() {
     robot->setInstanceIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierRobot)));
     robot->setClassIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierRobot)));
     
-    auto spriteComponent = FSEGTComponentsGenerator::generateSpriteComponent(shared_ptr<string>(new string(BRFilePathRobotImage)));
+    auto spriteComponent = FSEGTFactory::makeSpriteComponent(shared_ptr<string>(new string(BRFilePathRobotImage)));
     
     spriteComponent->framesCount = 4;
     spriteComponent->width = 68;
@@ -39,12 +39,12 @@ shared_ptr<FSEObject> BRSceneFactory::makeRobot() {
     
     robot->addComponent(spriteComponent);
     
-    auto positionComponent = FSEGTComponentsGenerator::generatePositionComponent(360, 405);
+    auto positionComponent = FSEGTFactory::makePositionComponent(360, 405);
         
     robot->addComponent(positionComponent);
     
-    auto speedComponent = FSEGTComponentsGenerator::generateSpeedComponent(1);
-    auto rotationComponent = FSEGTComponentsGenerator::generateRotationComponent(0);
+    auto speedComponent = FSEGTFactory::makeSpeedComponent(1);
+    auto rotationComponent = FSEGTFactory::makeRotationComponent(0);
     
     robot->addComponent(speedComponent);
     robot->addComponent(rotationComponent);
@@ -58,14 +58,14 @@ shared_ptr<FSEObject> BRSceneFactory::makeCrosshair() {
     crosshair->setInstanceIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierCrosshair)));
     crosshair->setClassIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierCrosshair)));    
     
-    auto spriteComponent = FSEGTComponentsGenerator::generateSpriteComponent(shared_ptr<string>(new string(BRFilePathCrosshairImage)));
+    auto spriteComponent = FSEGTFactory::makeSpriteComponent(shared_ptr<string>(new string(BRFilePathCrosshairImage)));
     
     spriteComponent->width = 64;
     spriteComponent->height = 64;    
     
     crosshair->addComponent(spriteComponent);
     
-    auto positionComponent = FSEGTComponentsGenerator::generatePositionComponent();
+    auto positionComponent = FSEGTFactory::makePositionComponent();
     
     positionComponent->x = 64;
     positionComponent->y = 64;
@@ -95,13 +95,13 @@ void BRSceneFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
     background->setInstanceIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierScene)));
     background->setClassIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierScene)));
     
-    auto spriteComponent = FSEGTComponentsGenerator::generateSpriteComponent(shared_ptr<string>(new string(BRFilePathSceneImage)));
+    auto spriteComponent = FSEGTFactory::makeSpriteComponent(shared_ptr<string>(new string(BRFilePathSceneImage)));
     
     spriteComponent->framesCount = 1;
     spriteComponent->width = 720;
     spriteComponent->height = 405;
     
-    auto positionComponent = FSEGTComponentsGenerator::generatePositionComponent(360, 405);
+    auto positionComponent = FSEGTFactory::makePositionComponent(360, 405);
     
     background->addComponent(positionComponent);
     background->addComponent(spriteComponent);

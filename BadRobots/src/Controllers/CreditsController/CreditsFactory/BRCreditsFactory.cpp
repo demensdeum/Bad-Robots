@@ -15,28 +15,40 @@
 
 #include <BadRobots/src/Const/BRConst.h>
 
-#include <FlameSteelEngineGameToolkit/Data/Components/FSEGTComponentsGenerator.h>
+#include <FlameSteelEngineGameToolkit/Data/Components/FSEGTFactory.h>
 
 BRCreditsFactory::BRCreditsFactory() {
 }
 
 void BRCreditsFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
     
-    auto demensdeumLogoObject = shared_ptr<FSEObject>(new FSEObject());
-    auto demensdeumLogoPositionComponent = FSEGTComponentsGenerator::generatePositionComponent(360, 405);
-    auto demensdeumLogoSpriteComponent = FSEGTComponentsGenerator::generateSpriteComponent(shared_ptr<string>(new string(BRFilePathDemensdeumLogoImage)));
-    demensdeumLogoSpriteComponent->width = 720;
-    demensdeumLogoSpriteComponent->height = 405;
-    demensdeumLogoObject->addComponent(demensdeumLogoSpriteComponent);
-    demensdeumLogoObject->addComponent(demensdeumLogoPositionComponent);
+    auto demensdeumLogoObject = FSEGTFactory::makeOnSceneObject(
+        
+            shared_ptr<string>(new string(BRFilePathDemensdeumLogoImage)),
+            shared_ptr<string>(new string(BRFilePathDemensdeumLogoImage)),
+            shared_ptr<string>(new string(BRFilePathDemensdeumLogoImage)),
+            360,
+            540,
+            0,
+            720,
+            540,
+            0,
+            0
+    );
     
-    auto flameSteelEngineLogoObject = shared_ptr<FSEObject>(new FSEObject());
-    auto flameSteelEnginePositionComponent = FSEGTComponentsGenerator::generatePositionComponent(360, 540);
-    auto flameSteelEngineSpriteComponent = FSEGTComponentsGenerator::generateSpriteComponent(shared_ptr<string>(new string(BRFilePathFlameSteelEngineLogoImage)));
-    flameSteelEngineSpriteComponent->width = 720;
-    flameSteelEngineSpriteComponent->height = 540;
-    flameSteelEngineLogoObject->addComponent(flameSteelEngineSpriteComponent);
-    flameSteelEngineLogoObject->addComponent(flameSteelEnginePositionComponent);
+    auto flameSteelEngineLogoObject = FSEGTFactory::makeOnSceneObject(
+        
+            shared_ptr<string>(new string(BRFilePathFlameSteelEngineLogoImage)),
+            shared_ptr<string>(new string(BRFilePathFlameSteelEngineLogoImage)),
+            shared_ptr<string>(new string(BRFilePathFlameSteelEngineLogoImage)),
+            360,
+            540,
+            0,
+            720,
+            540,
+            0,
+            0
+    );
     
     gameData->addGameObject(demensdeumLogoObject);
     gameData->addGameObject(flameSteelEngineLogoObject);

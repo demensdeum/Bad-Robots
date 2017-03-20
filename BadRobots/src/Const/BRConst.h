@@ -42,6 +42,8 @@ static int BRRobotWidth = 68;
 const string BRObjectClassIdentifierRobot = "Bad Robots Robot";
 const string BRObjectClassIdentifierScene = "Bad Robots Scene Background";
 const string BRObjectClassIdentifierCrosshair = "Bad Robots Crosshair";
+const string BRObjectClassIdentifierDemensdeumLogo = "Bad Robots Demensdeum Logo";
+const string BRObjectClassIdentifierFlameSteelEngineLogo = "Bad Robots Flame Steel Engine Logo";
 
 // file paths
 

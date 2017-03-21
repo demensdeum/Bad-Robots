@@ -43,7 +43,7 @@ shared_ptr<FSEObject> BRSceneFactory::makeRobot() {
         
     robot->addComponent(positionComponent);
     
-    auto speedComponent = FSEGTFactory::makeSpeedComponent(1);
+    auto speedComponent = FSEGTFactory::makeSpeedComponent(2);
     auto rotationComponent = FSEGTFactory::makeRotationComponent(0);
     
     robot->addComponent(speedComponent);

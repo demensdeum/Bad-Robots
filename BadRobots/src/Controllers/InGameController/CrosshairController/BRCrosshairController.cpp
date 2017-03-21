@@ -37,6 +37,8 @@ void BRCrosshairController::step(shared_ptr<FSEGTInputController> inputControlle
             
             FSEGTUtils::setObjectX(object, cursorX);
             FSEGTUtils::setObjectY(object, cursorY + BRCrosshairHeight / 2);
+            
+            break;
         }
     }
 }

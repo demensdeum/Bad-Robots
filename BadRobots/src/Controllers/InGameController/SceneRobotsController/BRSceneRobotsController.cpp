@@ -16,7 +16,7 @@
 
 #include <BadRobots/src/Const/BRConst.h>
 #include <FlameSteelEngineGameToolkit/Utils/FSEGTUtils.h>
-#include <BadRobots/src/Data/SceneFactory/BRSceneFactory.h>
+#include <BadRobots/src/Controllers/InGameController/SceneFactory/BRSceneFactory.h>
 
 BRSceneRobotsController::BRSceneRobotsController() {
     
@@ -73,7 +73,7 @@ void BRSceneRobotsController::respawnRobotsIfNeeded(shared_ptr<FSEObjects> scene
 
 int BRSceneRobotsController::randomRobotRespawnX() {
     
-    return -BRRobotWidth - FSEUtils::FSERandomInt(BRGameControllerScreenWidth);
+    return -BRRobotWidth - FSEUtils::FSERandomInt(BRGameControllerScreenWidth) * 4;
 }
 
 BRSceneRobotsController::~BRSceneRobotsController() {

@@ -15,6 +15,7 @@
 #define BRINGAMECONTROLLER_H
 
 #include <BadRobots/src/Controllers/InGameController/ObjectsPickerController/BRObjectsPickerController.h>
+#include <BadRobots/src/Controllers/InGameController/PreRenderObjectsSorter/BRPreRendererObjectsSorter.h>
 #include <BadRobots/src/Controllers/InGameController/SceneRobotsController/BRSceneRobotsController.h>
 #include <BadRobots/src/Controllers/InGameController/CrosshairController/BRCrosshairController.h>
 #include <FlameSteelEngineGameToolkit/Controllers/FSEGTSceneController.h>
@@ -36,6 +37,7 @@ public:
     
 private:
 
+    shared_ptr<BRPreRendererObjectsSorter> preRendererObjectsSorter;
     shared_ptr<BRSceneRobotsController> robotsController;
     shared_ptr<BRCrosshairController> crosshairController;
     shared_ptr<BRObjectsPickerController> objectsPickerController;

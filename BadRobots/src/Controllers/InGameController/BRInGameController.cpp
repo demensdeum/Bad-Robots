@@ -14,7 +14,9 @@
 #include "BRInGameController.h"
 
 #include <iostream>
-#include <BadRobots/src/Data/SceneFactory/BRSceneFactory.h>
+#include <BadRobots/src/Controllers/InGameController/SceneFactory/BRSceneFactory.h>
+
+#include <FlameSteelEngine/FSEUtils.h>
 
 using namespace std;
 
@@ -29,6 +31,8 @@ BRInGameController::BRInGameController() {
     objectsPickerController = shared_ptr<BRObjectsPickerController>(new BRObjectsPickerController());
     
     objectsPickerController->delegate = this;
+    
+    preRendererObjectsSorter = shared_ptr<BRPreRendererObjectsSorter>();
 }
 
 BRInGameController::BRInGameController(const BRInGameController& orig) {    
@@ -57,6 +61,8 @@ void BRInGameController::step() {
     
     robotsController->step(gameData);
     
+    preRendererObjectsSorter->sort(gameData);
+
     renderer->blankScreen();
     
     renderer->render(gameData);
@@ -73,10 +79,13 @@ void BRInGameController::objectsPickerDidPickerObject(BRObjectsPickerController 
         
         robotsController->respawnRobot(object);
         
-        robotsController->gameplayDifficulty++;
+        if (FSEUtils::FSERandomInt(2) == 1) {
         
+            robotsController->gameplayDifficulty++;
+            
+            cout << "BRInGameController difficulty up!" << endl;
+        }
     }
-    
 }
 
 BRInGameController::~BRInGameController() {

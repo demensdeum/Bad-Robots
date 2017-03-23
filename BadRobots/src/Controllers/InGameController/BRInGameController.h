@@ -14,17 +14,20 @@
 #ifndef BRINGAMECONTROLLER_H
 #define BRINGAMECONTROLLER_H
 
+#include <BadRobots/src/Controllers/InGameController/GameOverRuleController/BRGameOverRuleControllerDelegate.h>
 #include <BadRobots/src/Controllers/InGameController/ObjectsPickerController/BRObjectsPickerController.h>
 #include <BadRobots/src/Controllers/InGameController/PreRenderObjectsSorter/BRPreRendererObjectsSorter.h>
+#include <BadRobots/src/Controllers/InGameController/GameOverRuleController/BRGameOverRuleController.h>
 #include <BadRobots/src/Controllers/InGameController/SceneRobotsController/BRSceneRobotsController.h>
 #include <BadRobots/src/Controllers/InGameController/CrosshairController/BRCrosshairController.h>
 #include <FlameSteelEngineGameToolkit/Controllers/FSEGTSceneController.h>
+
 
 #include <memory>
 
 using namespace std;
 
-class BRInGameController: public FSEGTSceneController, BRObjectsPickerControllerDelegate {
+class BRInGameController: public FSEGTSceneController, BRObjectsPickerControllerDelegate, BRGameOverRuleControllerDelegate {
 public:
     BRInGameController();
     BRInGameController(const BRInGameController& orig);    
@@ -34,6 +37,7 @@ public:
     virtual void beforeStart();
     
     virtual void objectsPickerDidPickerObject(BRObjectsPickerController *pickerController, shared_ptr<FSEObject> object);
+    virtual void gameOverRuleControllerDidGameOverCase(BRGameOverRuleController *controller);
     
 private:
 
@@ -41,6 +45,7 @@ private:
     shared_ptr<BRSceneRobotsController> robotsController;
     shared_ptr<BRCrosshairController> crosshairController;
     shared_ptr<BRObjectsPickerController> objectsPickerController;
+    shared_ptr<BRGameOverRuleController> gameOverRuleController;
     
 };
 

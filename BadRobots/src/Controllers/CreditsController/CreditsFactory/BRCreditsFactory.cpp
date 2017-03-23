@@ -22,6 +22,8 @@ BRCreditsFactory::BRCreditsFactory() {
 
 void BRCreditsFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
     
+    gameData->getGameObjects()->removeAllObjects();
+    
     auto demensdeumLogoObject = FSEGTFactory::makeOnSceneObject(
         
             shared_ptr<string>(new string(BRFilePathDemensdeumLogoImage)),
@@ -50,8 +52,8 @@ void BRCreditsFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
             0
     );
     
+    gameData->addGameObject(flameSteelEngineLogoObject);    
     gameData->addGameObject(demensdeumLogoObject);
-    gameData->addGameObject(flameSteelEngineLogoObject);
 }
 
 BRCreditsFactory::BRCreditsFactory(const BRCreditsFactory& orig) {

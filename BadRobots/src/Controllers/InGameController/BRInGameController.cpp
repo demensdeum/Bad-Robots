@@ -16,11 +16,14 @@
 #include <iostream>
 #include <BadRobots/src/Controllers/InGameController/SceneFactory/BRSceneFactory.h>
 
+
 #include <FlameSteelEngine/FSEUtils.h>
 
 using namespace std;
 
 BRInGameController::BRInGameController() {
+    
+    this->setClassIdentifier(shared_ptr<string>(new string(BRIngameControllerIdentifier)));
     
     robotsController = shared_ptr<BRSceneRobotsController>(new BRSceneRobotsController());
     
@@ -32,7 +35,11 @@ BRInGameController::BRInGameController() {
     
     objectsPickerController->delegate = this;
     
-    preRendererObjectsSorter = shared_ptr<BRPreRendererObjectsSorter>();
+    preRendererObjectsSorter = shared_ptr<BRPreRendererObjectsSorter>(new BRPreRendererObjectsSorter());
+    
+    gameOverRuleController = shared_ptr<BRGameOverRuleController>(new BRGameOverRuleController());
+    
+    gameOverRuleController->delegate = this;
 }
 
 BRInGameController::BRInGameController(const BRInGameController& orig) {    
@@ -48,16 +55,31 @@ void BRInGameController::beforeStart() {
     
 }
 
+void BRInGameController::gameOverRuleControllerDidGameOverCase(BRGameOverRuleController* controller) {
+    
+    this->notifyListenerAboutControllerDidFinish(this);
+    
+}
+
 void BRInGameController::step() {
     
     FSEGTSceneController::step();
     
-    this->ioSystem->getInputController()->pollKey();
-    this->ioSystem->getInputController()->pollPointerPosition();
     
-    crosshairController->step(this->ioSystem->getInputController(), gameData);
+    if (gameOverRuleController->step(gameData) == true) {
+        
+        return;
+        
+    }
     
-    objectsPickerController->step(this->ioSystem->getInputController(), gameData);
+    auto inputController = this->ioSystem->getInputController();
+    
+    inputController->pollKey();
+    inputController->pollPointerPosition();
+    
+    crosshairController->step(inputController, gameData);
+    
+    objectsPickerController->step(inputController, gameData);
     
     robotsController->step(gameData);
     
@@ -68,7 +90,6 @@ void BRInGameController::step() {
     renderer->render(gameData);
     
     renderer->updateScreen();
-    
 }
 
 void BRInGameController::objectsPickerDidPickerObject(BRObjectsPickerController *pickerController, shared_ptr<FSEObject> object) {

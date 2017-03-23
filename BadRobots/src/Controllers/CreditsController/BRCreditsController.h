@@ -25,6 +25,8 @@ public:
     virtual void beforeStart();
     virtual void step();
     
+    int presentTime;
+    
 private:
     
 

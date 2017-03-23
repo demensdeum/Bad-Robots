@@ -14,8 +14,10 @@
 #include "BRGameController.h"
 
 #include <BadRobots/src/Const/BRConst.h>
+#include <BadRobots/src/Controllers/MenuController/BRMenuController.h>
 #include <BadRobots/src/Controllers/InGameController/BRInGameController.h>
 #include <BadRobots/src/Controllers/CreditsController/BRCreditsController.h>
+#include <BadRobots/src/Controllers/GameOverController/BRGameOverController.h>
 
 #include <FlameSteelEngineGameToolkit/IOSystems/SDL/FSEGTIOSDLSystem.h>
 #include <FlameSteelEngineGameToolkit/IOSystems/SDL/FSEGTIOSDLSystemParams.h>
@@ -37,15 +39,23 @@ BRGameController::BRGameController() {
     resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathCrosshairImage)), resourcesManager);
     resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathDemensdeumLogoImage)), resourcesManager);
     resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathFlameSteelEngineLogoImage)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathBadRobotsImage)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathGameOverImage)), resourcesManager);
     
     // States
 
     auto creditsController = shared_ptr<BRCreditsController>(new BRCreditsController());
     this->setControllerForState(creditsController, BRStateCredits);
     
+    auto menuController = shared_ptr<BRMenuController>(new BRMenuController());
+    this->setControllerForState(menuController, BRStateMenu);
+    
     auto inGameController = shared_ptr<BRInGameController>(new BRInGameController());
     this->setControllerForState(inGameController, BRStateIngame);
 
+    auto gameOverController = shared_ptr<BRGameOverController>(new BRGameOverController());
+    this->setControllerForState(gameOverController, BRGameOver);
+            
     // IO System
 
     auto ioSystemParams = shared_ptr<FSEGTIOSDLSystemParams>(new FSEGTIOSDLSystemParams());
@@ -57,6 +67,34 @@ BRGameController::BRGameController() {
     ioSystem->initialize(ioSystemParams);
     
     this->setIOSystem(ioSystem);
+}
+
+void BRGameController::controllerDidFinish(FSEGTController *controller) {
+    
+    if (controller->getClassIdentifier()->compare(BRCreditsControllerIdentifier) == 0) {
+        
+        this->switchToState(BRStateMenu);
+        
+    }
+    else if (controller->getClassIdentifier()->compare(BRMenuControllerIdentifier) == 0) {
+        
+        this->switchToState(BRStateIngame);
+        
+    }
+    else if (controller->getClassIdentifier()->compare(BRIngameControllerIdentifier) == 0) {
+        
+        this->switchToState(BRGameOver);
+        
+    }
+    else if (controller->getClassIdentifier()->compare(BRGameOverControllerIdentifier) == 0) {
+        
+        this->switchToState(BRStateIngame);
+        
+    }
+    else {
+        
+        this->switchToState(BRStateCredits);
+    }
 }
 
 BRGameController::BRGameController(const BRGameController& orig) {

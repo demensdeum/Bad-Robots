@@ -23,7 +23,9 @@ using namespace std;
 enum BRState {
     
     BRStateCredits,
-    BRStateIngame
+    BRStateMenu,
+    BRStateIngame,
+    BRGameOver
     
 };
 
@@ -37,6 +39,13 @@ static int BRGameControllerScreenHeight = 405;
 
 static int BRRobotWidth = 68;
 
+// controllers identifiers
+
+const string BRCreditsControllerIdentifier = "BRCreditsController";
+const string BRMenuControllerIdentifier = "BRMenuController";
+const string BRIngameControllerIdentifier = "BRIngameController";
+const string BRGameOverControllerIdentifier = "BRGameOverController";
+
 // object identifiers
 
 const string BRObjectClassIdentifierRobot = "Bad Robots Robot";
@@ -49,6 +58,8 @@ const string BRObjectClassIdentifierFlameSteelEngineLogo = "Bad Robots Flame Ste
 
 const string BRFilePathDemensdeumLogoImage = "data/graphics/demensdeumLogo.png";
 const string BRFilePathFlameSteelEngineLogoImage = "data/graphics/flameSteelEngineLogo.png";
+const string BRFilePathBadRobotsImage = "data/graphics/badRobotsMenu.png";
+const string BRFilePathGameOverImage = "data/graphics/gameOver.png";
 
 const string BRFilePathSceneImage = "data/graphics/scene.png";
 const string BRFilePathRobotImage = "data/graphics/robot.png";

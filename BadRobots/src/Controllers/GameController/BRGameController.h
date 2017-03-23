@@ -21,6 +21,9 @@ public:
     BRGameController();
     BRGameController(const BRGameController& orig);
     virtual ~BRGameController();
+    
+    virtual void controllerDidFinish(FSEGTController *controller);
+    
 private:
 
 };

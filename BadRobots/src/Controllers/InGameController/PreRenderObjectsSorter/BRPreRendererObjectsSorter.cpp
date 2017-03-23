@@ -15,6 +15,8 @@
 #include <BadRobots/src/Const/BRConst.h>
 #include "FlameSteelEngineGameToolkit/Utils/FSEGTUtils.h"
 
+#include <algorithm>
+
 BRPreRendererObjectsSorter::BRPreRendererObjectsSorter() {
 }
 

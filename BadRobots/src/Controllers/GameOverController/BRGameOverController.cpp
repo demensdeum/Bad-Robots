@@ -42,7 +42,7 @@ void BRGameOverController::step() {
     
     renderer->updateScreen();  
     
-    auto inputController = ioSystem->getInputController();
+    auto inputController = ioSystem->inputController;
     inputController->pollKey();
     
     if (inputController->isShootKeyPressed()) {

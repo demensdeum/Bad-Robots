@@ -72,7 +72,7 @@ void BRInGameController::step() {
         
     }
     
-    auto inputController = this->ioSystem->getInputController();
+    auto inputController = this->ioSystem->inputController;
     
     inputController->pollKey();
     inputController->pollPointerPosition();

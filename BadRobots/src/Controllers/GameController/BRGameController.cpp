@@ -12,6 +12,7 @@
  */
 
 #include "BRGameController.h"
+#include "FlameSteelEngineGameToolkit/AudioPlayer/FSEGTAudioPlayer.h"
 
 #include <BadRobots/src/Const/BRConst.h>
 #include <BadRobots/src/Controllers/MenuController/BRMenuController.h>
@@ -25,22 +26,15 @@
 
 #include <FlameSteelEngine/FSEUtils.h>
 
+#include <SDL/SDL_mixer.h>
+
 #include <memory>
 
 using namespace std;
 
 BRGameController::BRGameController() {
-
-    // Resources Manager
     
-    resourcesLoader = shared_ptr<FSEGTSDLResourcesLoader>(new FSEGTSDLResourcesLoader());
-    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathSceneImage)), resourcesManager);
-    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathRobotImage)), resourcesManager);
-    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathCrosshairImage)), resourcesManager);
-    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathDemensdeumLogoImage)), resourcesManager);
-    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathFlameSteelEngineLogoImage)), resourcesManager);
-    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathBadRobotsImage)), resourcesManager);
-    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathGameOverImage)), resourcesManager);
+    exitController = shared_ptr<BRExitController>(new BRExitController());
     
     // States
 
@@ -54,8 +48,8 @@ BRGameController::BRGameController() {
     this->setControllerForState(inGameController, BRStateIngame);
 
     auto gameOverController = shared_ptr<BRGameOverController>(new BRGameOverController());
-    this->setControllerForState(gameOverController, BRGameOver);
-            
+    this->setControllerForState(gameOverController, BRGameOver); 
+    
     // IO System
 
     auto ioSystemParams = shared_ptr<FSEGTIOSDLSystemParams>(new FSEGTIOSDLSystemParams());
@@ -67,6 +61,23 @@ BRGameController::BRGameController() {
     ioSystem->initialize(ioSystemParams);
     
     this->setIOSystem(ioSystem);
+    
+    exitController->setIOSystem(ioSystem);
+    
+    // Resources Manager
+    
+    resourcesLoader = shared_ptr<FSEGTSDLResourcesLoader>(new FSEGTSDLResourcesLoader());
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathSceneImage)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathRobotImage)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathCrosshairImage)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathDemensdeumLogoImage)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathFlameSteelEngineLogoImage)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathBadRobotsImage)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathGameOverImage)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathEpicMusic)), resourcesManager);       
+    
+    // start music playing
+    ioSystem->audioPlayer->play(shared_ptr<string>(new string(BRFilePathEpicMusic))); 
 }
 
 void BRGameController::controllerDidFinish(FSEGTController *controller) {
@@ -95,6 +106,13 @@ void BRGameController::controllerDidFinish(FSEGTController *controller) {
         
         this->switchToState(BRStateCredits);
     }
+}
+
+void BRGameController::step() {
+    
+    FSEGTGameController::step();
+    
+    exitController->step();
 }
 
 BRGameController::BRGameController(const BRGameController& orig) {

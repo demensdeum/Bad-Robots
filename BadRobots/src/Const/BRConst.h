@@ -65,5 +65,7 @@ const string BRFilePathSceneImage = "data/graphics/scene.png";
 const string BRFilePathRobotImage = "data/graphics/robot.png";
 const string BRFilePathCrosshairImage = "data/graphics/crosshair.png";
 
+const string BRFilePathEpicMusic = "data/music/epic-music.ogg";
+
 #endif /* BRCONST_H */
 

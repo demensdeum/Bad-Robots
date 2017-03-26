@@ -15,6 +15,10 @@
 #define BRGAMECONTROLLER_H
 
 #include <FlameSteelEngineGameToolkit/Controllers/FSEGTGameController.h>
+#include <BadRobots/src/Controllers/ExitController/BRExitController.h>
+#include <memory>
+
+using namespace std;
 
 class BRGameController: public FSEGTGameController {
 public:
@@ -24,8 +28,12 @@ public:
     
     virtual void controllerDidFinish(FSEGTController *controller);
     
+    virtual void step();
+    
 private:
 
+    shared_ptr<BRExitController> exitController;
+    
 };
 
 #endif /* BRGAMECONTROLLER_H */

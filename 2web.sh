@@ -12,7 +12,7 @@ FSE_FILES=`find ../../FlameSteelFramework/FlameSteelEngine -name "*.cpp" | paste
 FSEGT_FILES=`find ../../FlameSteelFramework/FlameSteelEngineGameToolkit -name "*.cpp" | paste -s -d" "`
 FSEGT_PROJECT_FILES=`find . -name "*.cpp" | paste -s -d" "`
 
-FSEGT_PROJECT_COMPILE_FLAGS="-I../../FlameSteelFramework -I.. -o $FSEGT_PROJECT_NAME.html --bind --use-preload-plugins --preload-file data -s TOTAL_MEMORY=30728640 -O3 -ffast-math -std=c++11"
+FSEGT_PROJECT_COMPILE_FLAGS="-I../../FlameSteelFramework -I.. -o $FSEGT_PROJECT_NAME.html --bind --use-preload-plugins --preload-file data -s TOTAL_MEMORY=67108864 -O3 -ffast-math -std=c++11"
 
 echo emcc $FSE_FILES $FSEGT_FILES $FSEGT_PROJECT_FILES $FSEGT_PROJECT_COMPILE_FLAGS
 

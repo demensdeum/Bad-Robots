@@ -27,7 +27,7 @@ public:
     BRGameOverFactory(const BRGameOverFactory& orig);
     virtual ~BRGameOverFactory();
     
-    void makeScene(shared_ptr<FSEGTGameData> gameData);
+    void makeScene(shared_ptr<FSEGTGameData> gameData, int score);
     
 private:
 

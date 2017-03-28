@@ -12,6 +12,7 @@
  */
 
 #include "BRGameOverFactory.h"
+#include "BadRobots/src/Controllers/InGameController/SceneFactory/BRSceneFactory.h"
 
 #include <BadRobots/src/Const/BRConst.h>
 #include <FlameSteelEngineGameToolkit/Data/Components/FSEGTFactory.h>
@@ -24,7 +25,7 @@ BRGameOverFactory::BRGameOverFactory() {
 BRGameOverFactory::BRGameOverFactory(const BRGameOverFactory& orig) {
 }
 
-void BRGameOverFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
+void BRGameOverFactory::makeScene(shared_ptr<FSEGTGameData> gameData, int score) {
     
     gameData->getGameObjects()->removeAllObjects();
     
@@ -43,6 +44,7 @@ void BRGameOverFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
     );    
 
     gameData->addGameObject(gameOverLogoObject);
+    gameData->addGameObject(BRSceneFactory::makeGameScoreObject(score));
 }
 
 BRGameOverFactory::~BRGameOverFactory() {

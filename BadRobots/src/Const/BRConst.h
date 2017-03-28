@@ -53,6 +53,7 @@ const string BRObjectClassIdentifierScene = "Bad Robots Scene Background";
 const string BRObjectClassIdentifierCrosshair = "Bad Robots Crosshair";
 const string BRObjectClassIdentifierDemensdeumLogo = "Bad Robots Demensdeum Logo";
 const string BRObjectClassIdentifierFlameSteelEngineLogo = "Bad Robots Flame Steel Engine Logo";
+const string BRObjectClassIdentifierGameScore = "Bad Robots Game Score";
 
 // file paths
 
@@ -66,6 +67,8 @@ const string BRFilePathRobotImage = "data/graphics/robot.png";
 const string BRFilePathCrosshairImage = "data/graphics/crosshair.png";
 
 const string BRFilePathEpicMusic = "data/music/epic-music.ogg";
+
+const string BRFont = "data/fonts/ChelseaMarket-Regular.ttf";
 
 #endif /* BRCONST_H */
 

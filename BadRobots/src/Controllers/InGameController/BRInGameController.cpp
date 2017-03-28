@@ -27,8 +27,6 @@ BRInGameController::BRInGameController() {
     
     robotsController = shared_ptr<BRSceneRobotsController>(new BRSceneRobotsController());
     
-    robotsController->gameplayDifficulty = 10;
-    
     crosshairController = shared_ptr<BRCrosshairController>(new BRCrosshairController());
     
     objectsPickerController = shared_ptr<BRObjectsPickerController>(new BRObjectsPickerController());
@@ -40,19 +38,30 @@ BRInGameController::BRInGameController() {
     gameOverRuleController = shared_ptr<BRGameOverRuleController>(new BRGameOverRuleController());
     
     gameOverRuleController->delegate = this;
+    
+    gameScore = shared_ptr<BRGameScore>(); // empty game score
+    
+    gameScoreController = shared_ptr<BRGameScoreController>(new BRGameScoreController());
 }
 
 BRInGameController::BRInGameController(const BRInGameController& orig) {    
 }
 
 void BRInGameController::beforeStart() {
+
+    robotsController->gameplayDifficulty = 10;
+    
+    gameScoreController->gameScore = gameScore;
+    
+    gameScore->reset();
     
     FSEGTSceneController::beforeStart();
     
     BRSceneFactory::makeScene(gameData);
     
-    this->setSceneObjects(gameData->getGameObjects());
+    gameScoreController->gameScoreObject = gameData->getGameObjects()->getObjectWithIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierGameScore)));
     
+    this->setSceneObjects(gameData->getGameObjects());
 }
 
 void BRInGameController::gameOverRuleControllerDidGameOverCase(BRGameOverRuleController* controller) {
@@ -83,6 +92,8 @@ void BRInGameController::step() {
     
     robotsController->step(gameData);
     
+    gameScoreController->step();
+    
     preRendererObjectsSorter->sort(gameData);
 
     renderer->blankScreen();
@@ -99,6 +110,8 @@ void BRInGameController::objectsPickerDidPickerObject(BRObjectsPickerController 
     if (object->getClassIdentifier()->compare(BRObjectClassIdentifierRobot) == 0) {
         
         robotsController->respawnRobot(object);
+        
+        gameScore->addScore(1);
         
         if (FSEUtils::FSERandomInt(2) == 1) {
         

@@ -29,6 +29,7 @@ public:
     
     static shared_ptr<FSEObject> makeRobot();
     static shared_ptr<FSEObject> makeCrosshair();
+    static shared_ptr<FSEObject> makeGameScoreObject(int score);
     
     static void makeScene(shared_ptr<FSEGTGameData> gameData);
     

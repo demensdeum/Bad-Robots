@@ -41,23 +41,30 @@ void BRPreRendererObjectsSorter::sort(shared_ptr<FSEGTGameData> gameData) {
     
     shared_ptr<FSEObject> scene;
     shared_ptr<FSEObject> crosshair;
+    shared_ptr<FSEObject> gameScore;
     
     for (int i = 0; i < gameData->getGameObjects()->size(); i++) {
         
         auto object = gameData->getGameObjects()->objectAtIndex(i);
         
-        if (object->getInstanceIdentifier()->compare(BRObjectClassIdentifierScene)==0) {
+        if (object->getInstanceIdentifier()->compare(BRObjectClassIdentifierScene) == 0) {
             
             scene = object;
             
             gameData->getGameObjects()->removeObjectAtIndex(i);
             i--;
         }
-        
-        else if (object->getInstanceIdentifier()->compare(BRObjectClassIdentifierCrosshair)==0) {
+        else if (object->getInstanceIdentifier()->compare(BRObjectClassIdentifierCrosshair) == 0) {
             
             crosshair = object;
 
+            gameData->getGameObjects()->removeObjectAtIndex(i);
+            i--;            
+        }
+        else if (object->getInstanceIdentifier()->compare(BRObjectClassIdentifierGameScore) == 0) {
+            
+            gameScore = object;
+            
             gameData->getGameObjects()->removeObjectAtIndex(i);
             i--;            
         }        
@@ -65,6 +72,7 @@ void BRPreRendererObjectsSorter::sort(shared_ptr<FSEGTGameData> gameData) {
     
     gameObjectsVector->insert(gameObjectsVector->begin(), scene);
     gameObjectsVector->insert(gameObjectsVector->end(), crosshair);
+    gameObjectsVector->insert(gameObjectsVector->end(), gameScore);
 }
 
 BRPreRendererObjectsSorter::BRPreRendererObjectsSorter(const BRPreRendererObjectsSorter& orig) {

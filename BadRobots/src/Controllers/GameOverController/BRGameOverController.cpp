@@ -30,7 +30,7 @@ BRGameOverController::BRGameOverController(const BRGameOverController& orig) {
 void BRGameOverController::beforeStart() {
     
     auto gameOverFactory = shared_ptr<BRGameOverFactory>(new BRGameOverFactory());
-    gameOverFactory->makeScene(gameData);    
+    gameOverFactory->makeScene(gameData, gameScore->getScore());    
     
 }
 

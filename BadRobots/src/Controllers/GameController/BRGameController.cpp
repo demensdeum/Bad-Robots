@@ -36,6 +36,8 @@ BRGameController::BRGameController() {
     
     exitController = shared_ptr<BRExitController>(new BRExitController());
     
+    gameScore = shared_ptr<BRGameScore>(new BRGameScore());
+    
     // States
 
     auto creditsController = shared_ptr<BRCreditsController>(new BRCreditsController());
@@ -46,9 +48,11 @@ BRGameController::BRGameController() {
     
     auto inGameController = shared_ptr<BRInGameController>(new BRInGameController());
     this->setControllerForState(inGameController, BRStateIngame);
+    inGameController->gameScore = gameScore;
 
     auto gameOverController = shared_ptr<BRGameOverController>(new BRGameOverController());
-    this->setControllerForState(gameOverController, BRGameOver); 
+    this->setControllerForState(gameOverController, BRGameOver);
+    gameOverController->gameScore = gameScore;
     
     // IO System
 
@@ -74,7 +78,8 @@ BRGameController::BRGameController() {
     resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathFlameSteelEngineLogoImage)), resourcesManager);
     resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathBadRobotsImage)), resourcesManager);
     resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathGameOverImage)), resourcesManager);
-    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathEpicMusic)), resourcesManager);       
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFilePathEpicMusic)), resourcesManager);
+    resourcesLoader->loadURL(shared_ptr<string>(new string(BRFont)), resourcesManager);
     
     // start music playing
     ioSystem->audioPlayer->play(shared_ptr<string>(new string(BRFilePathEpicMusic))); 

@@ -16,6 +16,12 @@
 
 #include <FlameSteelEngineGameToolkit/Controllers/FSEGTController.h>
 
+#include <BadRobots/src/Data/GameScore/BRGameScore.h>
+
+#include <memory>
+
+using namespace std;
+
 class BRGameOverController: public FSEGTController {
 public:
     BRGameOverController();
@@ -25,6 +31,9 @@ public:
     void beforeStart();
     
     void step();
+    
+    shared_ptr<BRGameScore> gameScore;
+    
     
 private:
 

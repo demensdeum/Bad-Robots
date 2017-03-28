@@ -74,6 +74,23 @@ shared_ptr<FSEObject> BRSceneFactory::makeCrosshair() {
     
     return crosshair;
 }
+shared_ptr<FSEObject> BRSceneFactory::makeGameScoreObject(int score) {
+    
+    auto gameScoreObject = shared_ptr<FSEObject>(new FSEObject());
+    
+    gameScoreObject->setClassIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierGameScore)));
+    gameScoreObject->setInstanceIdentifier(shared_ptr<string>(new string(BRObjectClassIdentifierGameScore)));
+    
+    auto scoreString = string("Score: ") + std::to_string(score);
+    
+    auto textComponent = FSEGTFactory::makeTextComponent(shared_ptr<string>(new string(BRFont)), shared_ptr<string>(new string(scoreString)));
+    gameScoreObject->addComponent(textComponent);
+    
+    auto positionComponent = FSEGTFactory::makePositionComponent(10, 10, 0);
+    gameScoreObject->addComponent(positionComponent);
+    
+    return gameScoreObject;
+}
 
 void BRSceneFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
     
@@ -111,6 +128,8 @@ void BRSceneFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
     // crosshair
     
     gameObjects->addObject(BRSceneFactory::makeCrosshair());
+    
+    gameObjects->addObject(BRSceneFactory::makeGameScoreObject(0));
 }
 
 BRSceneFactory::~BRSceneFactory() {

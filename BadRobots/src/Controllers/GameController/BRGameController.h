@@ -16,6 +16,7 @@
 
 #include <FlameSteelEngineGameToolkit/Controllers/FSEGTGameController.h>
 #include <BadRobots/src/Controllers/ExitController/BRExitController.h>
+#include <BadRobots/src/Data/GameScore/BRGameScore.h>
 #include <memory>
 
 using namespace std;
@@ -33,6 +34,7 @@ public:
 private:
 
     shared_ptr<BRExitController> exitController;
+    shared_ptr<BRGameScore> gameScore;
     
 };
 

@@ -18,3 +18,9 @@ Build for Web:
 1. First compile for Desktop
 2. Install emsdk into ~/emsdk directory
 3. Run ./2web.sh from BadRobots directory
+
+Frameworks:
+https://github.com/demensdeum/FlameSteelEngine
+https://github.com/demensdeum/FlameSteelEngineGameToolkit
+SDL
+Emscripten

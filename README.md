@@ -11,7 +11,7 @@ Build for Desktop:
 4. Checkout FlameSteelEngine and FlameSteelGameToolkit into FlameSteelProjects directory
 5. Inside BadRobots directory:
 
-cmake .
+cmake .<br>
 make
 
 Build for Web:

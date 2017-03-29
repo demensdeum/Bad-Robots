@@ -1,5 +1,5 @@
 # badrobots
-Bad Robots - arcade game for desktop and web
+Bad Robots - C++ arcade game for desktop and web (emscripten)
 
 In action:
 http://demensdeum.com/games/BadRobots/BadRobots.html

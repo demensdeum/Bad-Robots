@@ -20,7 +20,7 @@ Build for Web:
 3. Run ./2web.sh from BadRobots directory
 
 Frameworks:
-https://github.com/demensdeum/FlameSteelEngine
-https://github.com/demensdeum/FlameSteelEngineGameToolkit
-SDL
-Emscripten
+https://github.com/demensdeum/FlameSteelEngine<br>
+https://github.com/demensdeum/FlameSteelEngineGameToolkit<br>
+SDL<br>
+Emscripten<br>

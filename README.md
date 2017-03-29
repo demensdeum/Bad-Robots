@@ -8,7 +8,7 @@ Build for Desktop:
 1. Create FlameSteelProjects directory
 2. Create FlameSteelFramework directory inside
 3. Checkout BadRobots into FlameSteelProjects
-4. Checkout FlameSteelEngine and FlameSteelGameToolkit into FlameSteelProjects directory
+4. Checkout FlameSteelEngine and FlameSteelGameToolkit into FlameSteelFramework directory
 5. Inside BadRobots directory:
 
 cmake .<br>

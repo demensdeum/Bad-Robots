@@ -20,7 +20,16 @@
 #include <BadRobots/src/Controllers/CreditsController/BRCreditsController.h>
 #include <BadRobots/src/Controllers/GameOverController/BRGameOverController.h>
 
+#ifndef __EMSCRIPTEN__
+
 #include <FlameSteelEngineGameToolkit/IOSystems/SDL/FSEGTIOSDLSystem.h>
+
+#else
+
+#include <FlameSteelEngineGameToolkitWeb/IOSystems/Web/FSEGTIOWebSystem.h>
+
+#endif
+
 #include <FlameSteelEngineGameToolkit/IOSystems/SDL/FSEGTIOSDLSystemParams.h>
 #include <FlameSteelEngineGameToolkit/IOSystems/SDL/ResourcesLoader/FSEGTSDLResourcesLoader.h>
 
@@ -61,7 +70,16 @@ BRGameController::BRGameController() {
     ioSystemParams->width = BRGameControllerScreenWidth;
     ioSystemParams->height = BRGameControllerScreenHeight;
     
+#ifndef __EMSCRIPTEN__
+
     auto ioSystem = shared_ptr<FSEGTIOSDLSystem>(new FSEGTIOSDLSystem());
+    
+#else
+    
+    auto ioSystem = shared_ptr<FSEGTIOWebSystem>(new FSEGTIOWebSystem());
+    
+#endif
+    
     ioSystem->initialize(ioSystemParams);
     
     this->setIOSystem(ioSystem);

@@ -35,10 +35,10 @@ void BRGameOverFactory::makeScene(shared_ptr<FSEGTGameData> gameData, int score)
             shared_ptr<string>(new string(BRFilePathGameOverImage)),
             shared_ptr<string>(new string(BRFilePathGameOverImage)),
             360,
-            540,
+            405,
             0,
             720,
-            540,
+            405,
             0,
             0
     );    

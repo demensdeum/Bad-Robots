@@ -30,10 +30,10 @@ void BRCreditsFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
             shared_ptr<string>(new string(BRFilePathDemensdeumLogoImage)),
             shared_ptr<string>(new string(BRFilePathDemensdeumLogoImage)),
             360,
-            540,
+            405,
             0,
             720,
-            540,
+            405,
             0,
             0
     );
@@ -44,10 +44,10 @@ void BRCreditsFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
             shared_ptr<string>(new string(BRFilePathFlameSteelEngineLogoImage)),
             shared_ptr<string>(new string(BRFilePathFlameSteelEngineLogoImage)),
             360,
-            540,
+            405,
             0,
             720,
-            540,
+            405,
             0,
             0
     );

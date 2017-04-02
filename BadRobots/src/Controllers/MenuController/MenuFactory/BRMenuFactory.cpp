@@ -32,10 +32,10 @@ void BRMenuFactory::makeScene(shared_ptr<FSEGTGameData> gameData) {
             shared_ptr<string>(new string(BRFilePathBadRobotsImage)),
             shared_ptr<string>(new string(BRFilePathBadRobotsImage)),
             360,
-            540,
+            405,
             0,
             720,
-            540,
+            405,
             0,
             0
     );    
